@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f5ef">
+  <meta name="description" content="Meet Kirk Gabrielle Guerra, a student learning and creating with HTML.">
+  <title>Kirk Guerra | Learning by Making</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #f7f5ef;
+      --surface: #fffefa;
+      --ink: #202b28;
+      --muted: #65716c;
+      --accent: #286b54;
+      --accent-dark: #1d503f;
+      --highlight: #f2c66d;
+      --line: #e6e5dc;
+      --shadow: 0 24px 70px rgba(32, 43, 40, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+      transition: background-color 180ms ease, color 180ms ease;
+    }
+
+    body.dark {
+      color-scheme: dark;
+      --page: #17211d;
+      --surface: #202d27;
+      --ink: #f3f1e9;
+      --muted: #b6c0b9;
+      --accent: #8bd1ad;
+      --accent-dark: #b0e5c7;
+      --highlight: #f2c66d;
+      --line: #35433c;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .wrap {
+      width: min(1080px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2;
+      padding: 10px 14px;
+      transform: translateY(-160%);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 80px;
+      gap: 20px;
+    }
+
+    .wordmark {
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+    }
+
+    .wordmark span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(16px, 3vw, 32px);
+    }
+
+    nav a,
+    .theme-toggle {
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 650;
+    }
+
+    nav a {
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--highlight);
+      outline-offset: 4px;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      align-items: center;
+      gap: 48px;
+      min-height: 510px;
+      padding-block: 64px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--highlight);
+      content: "";
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 650px;
+      margin-bottom: 20px;
+      font-size: clamp(3rem, 7vw, 5.7rem);
+      line-height: 0.99;
+      letter-spacing: -0.075em;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .intro {
+      max-width: 530px;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.16rem);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 19px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--page);
+      font-weight: 750;
+      text-decoration: none;
+      transition: transform 160ms ease, background-color 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: var(--accent-dark);
+    }
+
+    .button span {
+      font-size: 1.15em;
+    }
+
+    .art {
+      position: relative;
+      display: grid;
+      min-height: 330px;
+      place-items: center;
+    }
+
+    .art::before,
+    .art::after {
+      position: absolute;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .art::before {
+      width: min(310px, 80vw);
+      aspect-ratio: 1;
+    }
+
+    .art::after {
+      width: min(245px, 64vw);
+      aspect-ratio: 1;
+      border-style: dashed;
+    }
+
+    .monogram {
+      z-index: 1;
+      display: grid;
+      width: 190px;
+      aspect-ratio: 1;
+      place-items: center;
+      border: 10px solid var(--surface);
+      border-radius: 50%;
+      background: var(--highlight);
+      box-shadow: var(--shadow);
+      color: #29372f;
+      font-size: 4.5rem;
+      font-weight: 850;
+      letter-spacing: -0.1em;
+    }
+
+    .spark {
+      position: absolute;
+      z-index: 1;
+      display: grid;
+      width: 48px;
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      font-size: 1.4rem;
+    }
+
+    .spark-one {
+      top: 42px;
+      right: 12%;
+      transform: rotate(9deg);
+    }
+
+    .spark-two {
+      bottom: 46px;
+      left: 5%;
+      transform: rotate(-10deg);
+    }
+
+    .section {
+      padding-block: 72px;
+      border-top: 1px solid var(--line);
+      scroll-margin-top: 24px;
+    }
+
+    .section-heading {
+      max-width: 580px;
+      margin-bottom: 32px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 10px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.055em;
+    }
+
+    .section-heading p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      min-height: 205px;
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+    }
+
+    .card-icon {
+      display: grid;
+      width: 42px;
+      aspect-ratio: 1;
+      margin-bottom: 22px;
+      place-items: center;
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+      font-size: 1.25rem;
+    }
+
+    .card h3 {
+      margin-bottom: 7px;
+      font-size: 1.05rem;
+    }
+
+    .card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .note {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: clamp(24px, 5vw, 42px);
+      border-radius: 22px;
+      background: var(--accent);
+      color: var(--page);
+    }
+
+    .note h2 {
+      max-width: 550px;
+      margin-bottom: 8px;
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.05em;
+    }
+
+    .note p {
+      margin-bottom: 0;
+      opacity: 0.82;
+    }
+
+    .note a {
+      flex: 0 0 auto;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--ink);
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .note a:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-block: 26px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    @media (max-width: 700px) {
+      .wrap {
+        width: min(100% - 32px, 520px);
+      }
+
+      header {
+        min-height: 70px;
+      }
+
+      nav {
+        gap: 12px;
+      }
+
+      nav a {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding-block: 56px 30px;
+      }
+
+      .art {
+        min-height: 275px;
+      }
+
+      .monogram {
+        width: 160px;
+        font-size: 3.8rem;
+      }
+
+      .section {
+        padding-block: 54px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: auto;
+      }
+
+      .card-icon {
+        margin-bottom: 16px;
+      }
+
+      .note {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="wrap">
+    <a class="wordmark" href="#" aria-label="Kirk Guerra home">KIRK<span>.</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#learning">What I'm learning</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">☾ Dark mode</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="welcome-title">
+      <div>
+        <p class="eyebrow">Student · beginner creator</p>
+        <h1 id="welcome-title">Hello, I'm <span>Kirk.</span></h1>
+        <p class="intro">Welcome to my little corner of the internet. I'm learning how to turn ideas into webpages, one line of code at a time.</p>
+        <a class="button" href="#about">Get to know me <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="art" aria-hidden="true">
+        <span class="spark spark-one">✦</span>
+        <span class="monogram">KG</span>
+        <span class="spark spark-two">&lt;/&gt;</span>
+      </div>
+    </section>
+
+    <section class="section wrap" id="about" aria-labelledby="about-title">
+      <div class="section-heading">
+        <p class="eyebrow">A little about me</p>
+        <h2 id="about-title">Curious by nature.<br>Learning by making.</h2>
+        <p>I'm Kirk Gabrielle Guerra, and this is my first step into web design. I'm excited to keep learning, trying new things, and making each page a little better.</p>
+      </div>
+    </section>
+
+    <section class="section wrap" id="learning" aria-labelledby="learning-title">
+      <div class="section-heading">
+        <p class="eyebrow">My learning journey</p>
+        <h2 id="learning-title">Small steps, cool things.</h2>
+        <p>Every great project starts with the basics. Here's what I'm exploring right now.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">〈/〉</div>
+          <h3>HTML</h3>
+          <p>Building the structure of a webpage with headings, paragraphs, links, and more.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">✳</div>
+          <h3>Creative thinking</h3>
+          <p>Turning a simple idea into something clear, useful, and fun to explore.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">↗</div>
+          <h3>Keep improving</h3>
+          <p>Practicing, learning from mistakes, and making my next version even better.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" aria-label="Helpful resource">
+      <div class="note">
+        <div>
+          <h2>Learning is better when you stay curious.</h2>
+          <p>Here's a helpful place to explore education in the Philippines.</p>
+        </div>
+        <a href="https://www.deped.gov.ph" target="_blank" rel="noopener noreferrer">Visit DepEd <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>Made with curiosity by Kirk Gabrielle Guerra.</p>
+    <p>My first webpage · 2026</p>
+  </footer>
+
+  <script>
+    const themeToggle = document.querySelector("#theme-toggle");
+
+    themeToggle.addEventListener("click", () => {
+      const isDark = document.body.classList.toggle("dark");
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+      themeToggle.textContent = isDark ? "☀ Light mode" : "☾ Dark mode";
+    });
+  </script>
+</body>
+</html>
